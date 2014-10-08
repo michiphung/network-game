@@ -1,0 +1,102 @@
+Classes:
+1. MachinePlayer
+	- Does most of the work: has game-tree search and eval function
+2. GameBoard
+	- Holds current game state in a 2 dimensional array of Chips
+3. Chip
+	- Holds information for each chip including placement, connections
+4. InvalidMoveException
+	- Throws exception that comes with evaluating different moves
+
+Modules:
+1. Move Finder (class GameBoard)
+	- Generates a list of all possible valid moves
+2. Move Validator (class GameBoard)
+	- Evaluates whether any provided move is a valid move
+3. GameTree Search (class MachinePlayer)
+	-Takes in a list of valid moves and uses the Eval function to find out the best possible move
+4. Eval (class GameBoard)
+	- Assigns a value to each provided move depending on how "good" the move is
+5. Network Identifier (class GameBoard)
+	- Looks at given gameboard and determines if a network exists
+	- Uses Chip class to find nodes of connected chips
+6. Connections (class Chip)
+	- Looks at the connections between chips
+
+Methods
+1. public DList moveFinder(int side, int type) { }
+	/**
+	 * moveFinder() finds all possible moves on a given gameboard for * a given player ("side"). 
+	 * Unusual Conditions: Side is not either player or opponent, then expect no useful
+	 * return
+	 * @param board is the gameboard on which moves are being found, 
+	 * side is the current player
+	 * @return returns a DList of possible valid moves on the board
+	 **/
+2. public boolean isValidMove(Move m) { }
+	/**
+	 * Checks whether a move is valid based on the rules of the game
+	 * Unusual Conditions: None
+	 * @param Move m is the move being tested
+	 * @return true or false based on whether the move is valid
+	 **/
+3. public Move findBestMove(DList moves, int side, double alpha, double beta) { }
+	/**
+	 * findBestMove() takes in a set of moves and finds the best one 
+	 * among them based on the the evaluation of that move
+	 * Unusual Conditions: Side is not either player or opponent, then expect no useful
+	 * return
+	 * @param moves is a list of moves for the GameTree search 
+	 * algorithm to use, side is the current player whose moves are 
+	 * being evaluated, and alpha/beta are the values which are being
+	 * compared to
+	 * @return the best Move out of all given moves 
+	 **/ 
+4. public double evalMove(Move m, int side) { }
+	/**
+	 * evalMove() takes a move and assigns a quantitative value to it
+	 * depending on how well it contributes to the player "side" 
+	 * winning the game.
+	 * Unusual Conditions: Side is not either player or opponent, then expect no useful
+	 * return
+	 * @param Move m is the move being evaluated, side is the current 
+	 * player who is making the move
+	 * @return a double value for how "good" the move is 
+	 **/ 
+5. public boolean hasValidNetwork(int side) { }
+	/**
+	 * hasValidNetwork() checks "this" GameBoard to see if a network 
+	 * exists for the given side
+	 * Unusual Conditions: Side is not either player or opponent, then expect no useful
+	 * return
+	 * @param side is the the player (chip color) for whom we are 
+	 * checking to see if a network exists
+	 * @return returns true or false depending on if a network exists
+	 **/
+6. public Chip[] findConnections(GameBoard gameboard, int side, Chip previous) { }
+	/**
+	 * findConnections finds all chips that "this" chip is connected 
+	 * to according to the rules of the game
+	 * Unusual Conditions: Side is not either player or opponent or previous chip is not * of the same side, then expect no useful return
+	 * @param takes in the current gameboard state for which it is
+	 * finding connected chips and the side for which we are looking 
+	 * for connected chips, previous chip to account for certain rules for network 
+	 * existence
+	 * @return returns an array of chips for which "this" chip is 
+	 * connected to
+	 **/
+	public Chip[] findNeighbors(GameBoard gameboard, int side) {  }
+	 /**
+	  * findNeighbors finds all neighbors of the current chip in order to identify 
+	  * clusters
+	  * @param takes in the current gameboard state and the side for which we are 
+	  * looking for neighbors
+	  * @return returns an array of chips which are neighboring "this" chip
+	 **/
+
+
+
+
+//TODO: moveFinder for STEP moves
+	Implement MachinePlayer move options (updating GameBoard)
+	Modules in progress: GameTree, Eval, Connections, Network ID
